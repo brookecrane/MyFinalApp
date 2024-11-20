@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import RestaurantCard from '../components/RestaurantCard';
+import { useNavigation } from '@react-navigation/native';
+import { useRestaurant } from './RestaurantContext';
 
 const restaurants = [
   { id: 1, name: "Mother Bear's Pizza", rating: "4.2 ⭐", address: "1428 E 3rd St, Bloomington, IN 47401", image: require("../assets/images/mother.png") },
@@ -16,7 +18,13 @@ const restaurants = [
 ];
 
 export default function Restaurants() {
+  const navigation = useNavigation();
+  const { setSelectedRestaurant } = useRestaurant()
 
+  const navigateToDetails = (item) => {
+    setSelectedRestaurant(item);
+    navigation.navigate('RestaurantDetail')
+  };
   return (
     <View style={{ flex: 1, padding: 10, backgroundColor: '#f8f8f8' }}>
      <FlatList
@@ -25,9 +33,8 @@ export default function Restaurants() {
         renderItem={({ item }) => (
           <RestaurantCard
             name={item.name}
-            rating={item.rating}
-            address={item.address}
             image={item.image}
+            onPress={() => navigateToDetails(item)}
           />
         )}
       />
