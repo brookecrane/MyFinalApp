@@ -6,9 +6,11 @@ export const useRestaurant = () => useContext(RestaurantContext);
 
 const RestaurantProvider = ({ children }) => {
   const [selectedRestaurant, setSelectedRestaurant] = useState([]);
+  
   const [favorites, setFavorites] = useState([]);
+
   const addToFavorites = (restaurant) => {
-    if (!favorites.some(item => item.id === restaurant.id)) {
+    if (!favorites.find(item => item.id === restaurant)) {
       setFavorites((prevFavorites) => [...prevFavorites, restaurant]);
     }
   };
@@ -16,6 +18,7 @@ const RestaurantProvider = ({ children }) => {
   const removeFromFavorites = (restaurant) => {
     setFavorites((prevFavorites) => prevFavorites.filter(item => item !== restaurant));
   };
+
   return (
     <RestaurantContext.Provider value={{ selectedRestaurant, setSelectedRestaurant, favorites, addToFavorites, removeFromFavorites   }}>
       {children}

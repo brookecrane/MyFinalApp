@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 const Settings = () => {
   const navigation = useNavigation();
 
-
   return (
     <View style={{ 
       flex: 1, 

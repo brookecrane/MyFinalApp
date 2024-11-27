@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 export default function Profile (){
-  const [name, setName] = useState('John Doe');
-  const [email, setEmail] = useState('john.doe@example.com');
+  const [name, setName] = useState('Jane Doe');
+  const [email, setEmail] = useState('jane.doe@example.com');
 
   const handleSaveProfile = () => {
     alert('Profile saved!');

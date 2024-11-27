@@ -9,14 +9,18 @@ export default function RestaurantDetail() {
 
   const { name, rating, address, image } = selectedRestaurant; 
 
-  const isFavorite = favorites.some(restaurant => restaurant === selectedRestaurant); 
-  const handleFavoriteToggle = () => {
+  const isFavorite = favorites.find(restaurant => restaurant.id === selectedRestaurant.id); 
+  
+  const handleFavorite = () => {
     if (isFavorite) {
       removeFromFavorites(selectedRestaurant);
+      alert('Removed from Favorites');
     } else {
       addToFavorites(selectedRestaurant);
+      alert('Added to Favorites');
     }
   };
+  
   return (
     <View style={{ 
       flex: 1, 
@@ -24,7 +28,7 @@ export default function RestaurantDetail() {
       backgroundColor: 'white' 
       }}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Favorites')}
+        onPress={handleFavorite}
         style={{
           position: 'absolute',
           top: 20,
@@ -37,7 +41,7 @@ export default function RestaurantDetail() {
           zIndex: 10, 
         }}
       >
-        <Text style={{ fontSize: 25 }}>♥️</Text>
+        <Text style={{ fontSize: 25 }}>{isFavorite ? '♥️' : '🩶'}</Text>
       </TouchableOpacity>
 
       <Image
@@ -64,24 +68,6 @@ export default function RestaurantDetail() {
       <Text style={{ fontSize: 18 }}>
          {address}
       </Text>
-
-      <TouchableOpacity
-        onPress={handleFavoriteToggle}
-        style={{
-          backgroundColor: isFavorite ? 'grey' : 'orange',
-          paddingVertical: 5,
-          paddingHorizontal: 10,
-          borderRadius: 8,
-          marginVertical: 20
-        }}
-      >
-        <Text style={{ 
-          fontSize: 18, 
-          color: 'white' 
-          }}>
-          {isFavorite ? '🗑️ Remove from Favorites' : '♥️ Add to Favorites'}
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }
